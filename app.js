@@ -93,7 +93,36 @@ if (process.argv[2] && process.argv[2] === "list") {
       let temp=loadData()
       temp.splice(process.argv[3]-1,1)
       saveData(temp)
-    console.log("Dasdsadsadasdsads")
+
+}else if (process.argv[2] && process.argv[2] === "delete_all") {
+  yargs.command({
+      command: "delete_all",
+      describe: "Delete_all",
+      builder: {
+        todo: {
+          describe: "Todo content",
+          demandOption: true,
+          type: "string"
+        },
+        complete: {
+          describe: "Todo status",
+          demandOption: false,
+          type: "boolean",
+          default: false
+        },
+        ID:{
+          demandOption: false,
+          type: "number",
+          default:process.argv[3]
+        }
+      },
+      handler: function(argv) {
+        console.log(argv.todo, argv.complete);
+      }
+    });
+    let temp=loadData()
+    saveData([])
+
 
 }
 yargs.parse();
